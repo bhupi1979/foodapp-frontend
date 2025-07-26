@@ -2,8 +2,10 @@ import axios from "axios"
 import { useEffect, useRef, useState } from "react"
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import Loader from "./loader";
 
 export default function Foodapi(){
+  const [loading, setLoading] = useState(false)
     const [items, setItems] = useState([])
   const [foodata,setfooddata]=useState({_id:"",imagename:"",videoname:"",audioname:""})
   // only for single file to be uploaded
@@ -18,6 +20,7 @@ export default function Foodapi(){
   let i=0
   useEffect(() => {
     fetchItems();
+    //setTimeout(() => setLoading(false), 3000)
   }, [])
 
   const fetchItems = async () => {
@@ -52,10 +55,12 @@ if(image)formdata.append('image',image)
   if(video)formdata.append('video',video)
     if(audio)formdata.append('audio',audio)
 if(foodata._id)
-{
+{setLoading(true)
 axios.put(`${import.meta.env.VITE_API_DATA_UPDATE}${foodata._id}`,formdata).then((res)=>{
 console.log(res)
+setLoading(false)
 if (res.data.status) {
+  
 toast("data update Successfully!", {
   position: "top-right",
   autoClose: 3000, // milliseconds
@@ -97,6 +102,7 @@ if (fileInputRefimage.current) {
     fileInputRefaudio.current.value = '';
   }
 }).catch((err)=>{
+  setLoading(false)
   console.log(err)
  
           if (err.response) {
@@ -132,10 +138,12 @@ if (fileInputRefimage.current) {
 
 
 }//end of if foodid
-else{
+else{setLoading(true)
 axios.post(import.meta.env.VITE_API_DATA_INSERT,formdata).then((res)=>{
 console.log(res)
+  setLoading(false)
 if (res.data.status) {
+
 toast("data save Successfully!", {
   position: "top-right",
   autoClose: 3000, // milliseconds
@@ -315,6 +323,7 @@ console.log(res.data)
   }
     return (
         <>
+        {loading && <Loader />}
         <h1 className="text-danger text-center text-uppercase bg-info">this is food api</h1>
         {/* form for entering the food data */}
         <form noValidate className="w-50 mx-auto bg-warning p-3 mb-5" onSubmit={foodinsertdata}>
@@ -375,7 +384,7 @@ console.log(res.data)
             <td style={{verticalAlign: "middle"}}>{item.imagename}</td>
             <td>  <img
               src={`${import.meta.env.VITE_UPLOAD}${item.imageURL}`}
-              alt={item.name}
+              alt={item.imagename}
               width="100"
               height="100"
             /></td>
