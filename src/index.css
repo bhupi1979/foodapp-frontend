@@ -1,0 +1,4 @@
+*{margin:0;padding:0}
+table thead tr, table thead th, table  td , table tr{
+  border: 1px solid black;
+}
