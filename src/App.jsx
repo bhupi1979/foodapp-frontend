@@ -1,7 +1,7 @@
 
 
 import './App.css'
-import Foodapi from './foodapi'
+import Foodapi from './foodapi1'
 
 
 function App() {
