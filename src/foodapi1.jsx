@@ -292,7 +292,7 @@ export default function Foodapi() {
       }).catch((err) => {
         setLoading(false)
         console.log(err.data)
-        toast(err.data, {
+        toast("data not delete", {
           position: "top-right",
           autoClose: 3000, // milliseconds
           hideProgressBar: false,
