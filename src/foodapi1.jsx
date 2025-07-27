@@ -398,7 +398,7 @@ export default function Foodapi() {
             </tr>
 
 
-          )) : <h1>no data found</h1>}
+          )) : <tr><td>no data found</td></tr>}
         </tbody>
       </table>
     </>
