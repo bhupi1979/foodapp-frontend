@@ -22,7 +22,7 @@ export default function Foodapi() {
     fetchItems();
   
   }, [])
-
+//*********function for getting data */
   const fetchItems = async () => {
     setLoading(true)
     await axios.get(import.meta.env.VITE_API_DATA_VIEW).then((res) => {
@@ -37,14 +37,17 @@ export default function Foodapi() {
       console.error('Error fetching data:', error); // Handle error
     })
   }
+  //******end of getting data */
+  //funciton for inserting and updating data*////
   let foodinsertdata = (e) => {
    e.preventDefault()
    
     let erroobj = validate()
     if (Object.keys(erroobj).length > 0) {
-      alert("form not submited")
+      //alert("form not submited")
     }
     else {
+      //**this fetching data from form */
       let formdata = new FormData()
       for (let key in foodata) {
         formdata.append(key, foodata[key])
@@ -53,13 +56,14 @@ export default function Foodapi() {
       if (image) formdata.append('image', image)
       if (video) formdata.append('video', video)
       if (audio) formdata.append('audio', audio)
+//end of fetching data from form
+      //if fooddata id exist than update else insert
       if (foodata._id) {
         setLoading(true)
         axios.put(`${import.meta.env.VITE_API_DATA_UPDATE}${foodata._id}`, formdata).then((res) => {
           console.log(res)
           setLoading(false)
           if (res.data.status) {
-
             toast("data update Successfully!", {
               position: "top-right",
               autoClose: 3000, // milliseconds
@@ -218,7 +222,7 @@ export default function Foodapi() {
 
       }//ednd of foodid else
     }//end of validation else
-  }
+  }//*****end of inserting data */
   let onchangehandle = (e) => {
     let { name, value } = e.target
     setfooddata((prev) => ({ ...prev, [name]: value }))
