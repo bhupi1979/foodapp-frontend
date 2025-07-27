@@ -308,11 +308,22 @@ export default function Foodapi() {
   let updatefooddata = (e) => {
     let id = e.target.value
     setLoading(true)
+    if (fileInputRefimage.current) {
+            fileInputRefimage.current.value = '';
+          }
+          if (fileInputRefvideo.current) {
+            fileInputRefvideo.current.value = '';
+          }
+          if (fileInputRefaudio.current) {
+            fileInputRefaudio.current.value = '';
+          }
     axios.get(`${import.meta.env.VITE_API_DATA_SINGLEID}${id}`).then((res) => {
       setLoading(false)
       console.log(res.data.data)
       console.log(res.data.data.name)
       setfooddata(res.data.data)
+     
+ 
     }).catch(error => {
       setLoading(false)
       console.error('Error fetching data:', error); // Handle error
