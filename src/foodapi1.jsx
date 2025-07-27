@@ -383,18 +383,18 @@ console.log(res.data)
             <td style={{verticalAlign: "middle"}} >{++i}</td>
             <td style={{verticalAlign: "middle"}}>{item.imagename}</td>
             <td>  <img
-              src={`${import.meta.env.VITE_UPLOAD}${item.imageURL}`}
+              src={`${item.imageURL}`}
               alt={item.imagename}
               width="100"
               height="100"
             /></td>
             <td>{item.videoname}</td>
             <td>
-              <video width="100" height="100" controls src={`${import.meta.env.VITE_UPLOAD}${item.videoURL}`}  />
+              <video width="100" height="100" controls src={`${item.videoURL}`}  />
             </td>
             <td>{item.audioname}</td>
           <td>
-            <audio controls  src={`${import.meta.env.VITE_UPLOAD}${item.audioURL}`}  />
+            <audio controls  src={`${item.audioURL}`}  />
           </td>
             <td style={{verticalAlign: "middle"}}><button className="bg bg-warning btn" onClick={updatefooddata} value={item._id}>EDIT</button></td>
             <td style={{verticalAlign: "middle"}}><button className="bg bg-danger btn" onClick={deletefooddata} value={item._id}>Delete</button></td>
