@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Loader from "./loader";
 
 export default function Foodapi() {
+  const [isVisible, setIsVisible] = useState(false)
   const [loading, setLoading] = useState(false)
   const [items, setItems] = useState([])
   const [foodata, setfooddata] = useState({ _id: "", imagename: "", videoname: "", audioname: "" })
@@ -21,7 +22,17 @@ export default function Foodapi() {
   useEffect(() => {
     fetchItems();
   //setTimeout(()=>alert(items.length),8000)
+  window.addEventListener("scroll", handleScroll);
+    // Clean up the listener
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [])
+  const handleScroll = () => {
+    if (window.scrollY > 100) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  }
 //*********function for getting data */
   const fetchItems = async () => {
     setLoading(true)
@@ -335,6 +346,11 @@ export default function Foodapi() {
   return (
     <>
       {loading && <Loader />}
+     {isVisible? <i className="position-fixed bottom-0 end-0" onClick={()=>{window.scrollTo(0,0)}}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+  <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
+</svg>
+      </i>:null}
       <h1 className="text-danger text-center text-uppercase bg-info">this is food api</h1>
       {/* form for entering the food data */}
       <form noValidate className="w-50 mx-auto bg-warning p-3 mb-5" onSubmit={foodinsertdata}>
