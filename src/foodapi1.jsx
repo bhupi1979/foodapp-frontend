@@ -308,6 +308,9 @@ export default function Foodapi() {
   let updatefooddata = (e) => {
     let id = e.target.value
     setLoading(true)
+    setImage(null)
+          setAudio(null)
+          setVideo(null)
     if (fileInputRefimage.current) {
             fileInputRefimage.current.value = '';
           }
