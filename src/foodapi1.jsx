@@ -20,7 +20,7 @@ export default function Foodapi() {
   let i = 0
   useEffect(() => {
     fetchItems();
-  
+  //setTimeout(()=>alert(items.length),8000)
   }, [])
 //*********function for getting data */
   const fetchItems = async () => {
@@ -375,7 +375,7 @@ export default function Foodapi() {
           </tr>
         </thead>
         <tbody>
-          {items ? items.map((item, index) => (
+          {items.length ? items.map((item, index) => (
             <tr key={index}>
               <td style={{ verticalAlign: "middle" }} >{++i}</td>
               <td style={{ verticalAlign: "middle" }}>{item.imagename}</td>
@@ -398,7 +398,7 @@ export default function Foodapi() {
             </tr>
 
 
-          )) : <tr><td>no data found</td></tr>}
+          )) : <tr><td colSpan={5}>no data found</td></tr>}
         </tbody>
       </table>
     </>
