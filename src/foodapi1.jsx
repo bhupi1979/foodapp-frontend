@@ -24,15 +24,16 @@ export default function Foodapi() {
   }, [])
 
   const fetchItems = async () => {
+    setLoading(true)
     await axios.get(import.meta.env.VITE_API_DATA_VIEW).then((res) => {
-      //alert(res.data)
-      //console.log(res.data)
+      setLoading(false)
       return res.data
     }).then((finaldata) => {
       // console.log(finaldata)
       if (finaldata.status)
         setItems(finaldata.data)
     }).catch(error => {
+      setLoading(false)
       console.error('Error fetching data:', error); // Handle error
     })
   }
