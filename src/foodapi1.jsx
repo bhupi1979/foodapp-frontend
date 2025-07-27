@@ -20,7 +20,7 @@ export default function Foodapi() {
   let i = 0
   useEffect(() => {
     fetchItems();
-  //setTimeout(() => setLoading(false), 3000)
+  
   }, [])
 
   const fetchItems = async () => {
@@ -38,7 +38,8 @@ export default function Foodapi() {
     })
   }
   let foodinsertdata = (e) => {
-    e.preventDefault()
+   e.preventDefault()
+   
     let erroobj = validate()
     if (Object.keys(erroobj).length > 0) {
       alert("form not submited")
